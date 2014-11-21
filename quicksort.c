@@ -6,17 +6,19 @@
 void seed_arr(int * arr, int arrl);
 void verify_arr(int *arr, int arrl);
 void arrify(int *arr, int arrl);
-void sort_arr(int *arr,  int arrl);
+void quicksort(int *arr,  int begin, int end);
 void sift_down(int *arr, int arrl, int index);
 void swap(int *arr, int a, int b);
 void print_arr(int *arr, int arrl);
+int partition(int *arr, int begin, int end);
+int choose_pivot(int begin, int end);
 
 int main() {
     int arrl = 10;
     int *arr = malloc(arrl * sizeof(int));
     seed_arr(arr, arrl);
     print_arr(arr, arrl);
-    sort_arr(arr, arrl);
+    quicksort(arr, 0, arrl-1);
     print_arr(arr, arrl);
     verify_arr(arr, arrl);
     free(arr);
@@ -45,13 +47,14 @@ void verify_arr(int *arr, int arrl) {
     }
 }
 
-void sort_arr(int *arr,  int arrl) {
-    // FIXME
+void quicksort(int *arr,  int begin, int end) {
+}
+
+int partition(int *arr, int begin, int end) {
+}
+
+int choose_pivot(int begin, int end) {
 }
 
 void swap(int *arr, int a, int b) {
-    // FIXME: Explain why this works
-    arr[a] ^= arr[b];
-    arr[b] ^= arr[a];
-    arr[a] ^= arr[b];
 }
