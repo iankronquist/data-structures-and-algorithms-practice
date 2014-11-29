@@ -23,9 +23,10 @@ int main(){
 }
 
 void print_heap(int *heap){
+    printf("[ ");
     for(int i = 0; i < LEN; i++)
         printf("%d, ", heap[i]);
-    printf("\n");
+    printf("]\n");
 }
 
 void seed_heap(int *heap){
@@ -36,25 +37,22 @@ void seed_heap(int *heap){
 }
 
 void heapify(int *heap){
-    while(int start = (LEN-2/2); start >= 0; start--){
+    for(int start = (LEN-2)/2; start >= 0; start--){
         sift_down(heap, start, LEN-1);
     }
 }
 
 void sift_down(int *heap, int start, int end){
-    int root = start;
-    while((root*2)+1 < end){
-        int child = (root*2)+1;
-        int temp = root;
-        if(heap[temp] < heap[child])
-            temp = child;
-        if(child+1 <= end && heap[temp] < heap[child+1])
-            temp = child+1;
-        if(temp == root)
-            return;
+    while((start*2)+1 <= end){
+        int child = (start*2)+1;
+        if((child+1 <= end) && (heap[child] < heap[child+1]))
+            child++;
+        if(heap[start]<heap[child]){
+            possibly_better_swap(heap, heap[start], heap[child]);
+            start = child;
+        }
         else{
-            swap(heap, heap[root], heap[temp]);
-            root = temp;
+            return;
         }
     }            
 }
@@ -64,8 +62,8 @@ void sort_heap(int *heap){
     heapify(heap);
     // Get the ever-shortening length of the heap
     for(int end=LEN-1; end>0; end--){
-        swap(heap, heap[end], heap[0]);
-        sift_down(heap, 0, end);
+        possibly_better_swap(heap, heap[end], heap[0]);
+        sift_down(heap, 0, end-1);
     }         
 }
 
