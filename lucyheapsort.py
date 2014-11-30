@@ -8,7 +8,7 @@ def main():
 
 def seed_heap():
     heap = []
-    for x in range(0, 15):
+    for x in range(0, 10):
         heap.append(randint(0, 100))
     return heap
 
@@ -23,11 +23,11 @@ def sort_heap(heap):
         sift_down(heap, 0, x-1)
 
 def sift_down(heap, start, end):
-    while((start*2)+1  <= end):
+    while (start*2)+1  <= end:
         child = (start*2)+1
-        if((child+1 <= end) and (heap[child] < heap[child+1])):
+        if (child+1 <= end) and (heap[child] < heap[child+1]):
             child+=1
-        if(heap[start] < heap[child]):
+        if heap[start] < heap[child]:
             heap[start], heap[child] = heap[child], heap[start]
             start = child
         else: 

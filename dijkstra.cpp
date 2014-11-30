@@ -20,7 +20,7 @@ int getDimensions(){
     if (cin.fail() || vertices<0 || vertices>100){
         cin.clear();
         cin.ignore(1000,'\n');
-        cout<<"Sorry! You didn't input an integer between 1 and 100! Please try again:  ";
+        cout<<"Sorry! You didn't input an integer between 1 and 100! Please try again:  "<<endl;
         valid = 1;
     }
     else
