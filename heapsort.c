@@ -55,7 +55,7 @@ void heapify(int *heap, int heapl) {
 void sort_heap(int *heap,  int heapl) {
     for (int i = heapl/2; i >= 0; i--) {
         sift_down(heap, i, heapl);
-//        print_heap(heap, heapl);
+        //        print_heap(heap, heapl);
     }
     for (int i = heapl-1; i >= 1; i--) {
         swap(heap, 0, i);
@@ -72,46 +72,22 @@ void swap(int *heap, int a, int b) {
 
 void sift_down(int *heap, int index, int bottom) {
     int childl = index * 2;
-    if (childl > bottom) 
+    if (childl >= bottom){
+        /* In this case childl can be out of bounds of the array, since you are passing it 
+           the *length* and not the last index of the array (ie. heap[9] when length is 10), 
+           which is throwing an out of bounds error.  You can get rid of this by just having 
+           it return, as your heap is already heapified.*/
         return;
+    }
     int childr = index * 2 + 1;
     int follow = index;
-    if (childl == bottom)
-        /* In this case childl can be out of bounds of the array, since you are passing it 
-        the *length* and not the last index of the array (ie. heap[9] when length is 10), 
-        which is throwing an out of bounds error.  You can get rid of this by just having 
-        it return, as your heap is already heapified.*/
-        return;
     else if (heap[childr] > heap[childl]) 
         follow = childr;
     else 
         follow = childl;
-    if (heap[index] < heap[follow]) {
+    if (heap[index] < heap[follow])
         swap(heap, index, follow);
-    }
-    if(follow == index) return;
+    if(follow == index) 
+        return;
     sift_down(heap, follow, bottom);
 }
-/*
-void sift_down(int *heap, int root, int bottom)
-{
-  int maxChild, temp;
-
-  while ((root*2 <= bottom))
-  {
-    if (root*2 == bottom)
-      maxChild = root * 2;
-    else if (heap[root * 2] > heap[root * 2 + 1])
-      maxChild = root * 2;
-    else
-      maxChild = root * 2 + 1;
-
-    if (heap[root] < heap[maxChild])
-    {
-      swap(heap, root, maxChild);
-      root = maxChild;
-    }
-    else
-        return;
-  }
-}*/
